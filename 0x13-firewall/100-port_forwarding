@@ -1,5 +1,7 @@
-# NAT table rules
-*nat
-:PREROUTING ACCEPT [0:0]
--A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
-COMMIT
+#!/bin/bash
+
+# Forward port 8080 to port 80
+sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 8080 -j REDIRECT --to-port 80
+
+# Save the iptables rules
+sudo iptables-save > /etc/iptables/rules.v4
