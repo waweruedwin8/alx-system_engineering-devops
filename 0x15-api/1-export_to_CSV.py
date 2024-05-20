@@ -34,7 +34,7 @@ def fetch_employee_data(employee_id):
     user_data = user_response.json()
     todos_data = todos_response.json()
 
-    return user_data.get("username"), todos_data
+    return user_data['username'], todos_data
 
 
 def export_to_csv(employee_id, username, todos):
@@ -50,7 +50,7 @@ def export_to_csv(employee_id, username, todos):
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         for todo in todos:
-            writer.writerow([employee_id, username, todo.get("completed"), todo.get("title")])
+            writer.writerow([employee_id, username, todo['completed'], todo['title']])
 
 
 if __name__ == "__main__":
