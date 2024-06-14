@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+import requests
+
+api_key = "f203068c58a26cb555edad12a9cafa785733a336"
+app_key = "f203068c58a26cb555edad12a9cafa785733a336"
+
+url = "https://api.datadoghq.com/api/v1/dashboard"
+headers = {
+    "DD-API-KEY": api_key,
+    "DD-APPLICATION-KEY": app_key
+}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    dashboards = response.json()["dashboards"]
+    for dashboard in dashboards:
+        if dashboard["id"] == "aabc3e6cef5b392b22afd572b29dbf15":
+            dashboard_id = dashboard["id"]
+            print("Dashboard ID:", dashboard_id)
+            break
+else:
+    print("Failed to retrieve dashboards:", response.status_code)
+
